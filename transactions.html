@@ -285,7 +285,7 @@
                                 flowType = "QSR";
                             }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (flowType -= "QSR" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (flowType == "QSR" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
                             $("#trxTbl tbody").append(rowList);
                         }
                         trxTable = $('#trxTbl').DataTable(
