@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Customers</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description"
+        content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template" />
+    <meta name="author" content="CodedThemes" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/dataTable.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <script src="assets/plugins/jquery/js/jquery.min.js"></script>
+
+    <!-- Required Js -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>
+
+    <script src="assets/plugins/jquery-datatable/dataTable.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrapDataTable.min.js"></script>
+
+</head>
+
+<body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+
+    <!-- [ navigation menu ] start -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a href="index.html" class="b-brand">
+                    <!-- <div class="b-bg"> -->
+                    <!-- <i class="feather icon-trending-up"></i> -->
+                    <img src="assets/images/z.png" height="40px" />
+                    <!-- </div> -->
+                    <span class="b-title">Zoom</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li data-username="dashboard Default" class="nav-item">
+                        <a href="index.html" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-home"></i>
+                            </span>
+                            <span class="pcoded-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                    <li data-username="mqtt subscribers" class="nav-item active">
+                        <a href="customers.html" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-user"></i>
+                            </span>
+                            <span class="pcoded-mtext">Customers</span>
+                        </a>
+                    </li>
+                    <li data-username="mqtt subscribers" class="nav-item">
+                        <a href="transactions.html" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </span>
+                            <span class="pcoded-mtext">Transactions</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- [ navigation menu ] end -->
+
+    <!-- [ Header ] start -->
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+            <a href="index.html" class="b-brand">
+                <div class="b-bg">
+                    <i class="feather icon-trending-up"></i>
+                </div>
+                <span class="b-title">Datta Able</span>
+            </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" href="javascript:">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i
+                            class="feather icon-maximize"></i></a></li>
+                <li class="nav-item">
+                    <div class="main-search">
+                        <div class="input-group">
+                            <input type="text" id="m-search" class="form-control" placeholder="Search . . .">
+                            <a href="javascript:" class="input-group-append search-close">
+                                <i class="feather icon-x input-group-text"></i>
+                            </a>
+                            <span class="input-group-append search-btn btn btn-primary">
+                                <i class="feather icon-search input-group-text"></i>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                                <span>John Doe</span>
+                                <!-- <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                    <i class="feather icon-log-out"></i>
+                                </a> -->
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="auth-signin.html" class="dropdown-item"><i
+                                            class="feather icon-log-out"></i>
+                                        Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- [ Header ] end -->
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Zoom Customers</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ basic-table ] start -->
+                                <div class="col-xl-12 seperator">
+                                    <div class="card">
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm" id="customersTbl">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Phone</th>
+                                                            <th width="230px">Balance</th>
+                                                            <th>Onboarded On</th>
+                                                            <th>App ID</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-end">
+
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var subTable;
+            var totalCustomer = sessionStorage.getItem("totCust");
+            var showPage = 1;
+
+            loadData(showPage);
+
+            $(document).on("click", ".viewBalLink", function () {
+
+                var rowID = $(this).parent().parent().parent().attr("id");
+
+                $(this).html("<i class='fa fa-spinner fa-spin'></i>Loading");
+                $.ajax({
+                    url: "https://8gvfppglb0.execute-api.ap-south-1.amazonaws.com/apl/apl-details",
+                    type: "POST",
+                    crossDomain: true,
+                    //dataType: "jsonp",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "api_mode": 3, "app_id": rowID }),
+                    success: function (res) {
+                        var aBal = res.apl_balance ? res.apl_balance : 0;
+                        if (res.success == true) {
+                            $("#" + rowID).find(".balCol div .viewBalLink").html("").html("View Balance");
+                            $("#" + rowID).find(".balCol div span").remove();
+                            $("#" + rowID).find(".balCol div").append("<span class='balBox'><i class='fas fa-wallet text-c-green'></i> &#8377;" + aBal + "</span>")
+                        }
+                        if (res.success == false) {
+                            $("#" + rowID).find(".balCol div .viewBalLink").html("").html("View Balance");
+                            $("#" + rowID).find(".balCol div span").remove();
+                            $("#" + rowID).find(".balCol div").append("<span class='balBox'><i class='fas fa-wallet text-c-red'></i> Not Authorized</span>")
+                        }
+                    }
+                });
+            });
+
+            $(document).on("click", ".viewTrxLink", function () {
+                var rowID = $(this).parent().parent().attr("id");
+                window.location.href = 'transactions.html?appId=' + rowID;
+            });
+
+            $(document).on("click", ".page-link", function () {
+                var triggerPage = $(this).attr("id");
+                loadData(triggerPage);
+            });
+
+            subTable = $('#customersTbl').DataTable(
+                {
+                    // "pagingType": "numbers",
+                    // "pageLength": 10,
+                    "paging": false,
+                    "ordering": false,
+                    "info": false,
+                    "bFilter": true,
+                }
+            );
+        });
+
+        function loadData(showPage) {
+            $.ajax({
+                url: "https://8gvfppglb0.execute-api.ap-south-1.amazonaws.com/apl/apl-details",
+                type: "GET",
+                crossDomain: true,
+                //dataType: "jsonp",
+                dataType: 'json',
+                contentType: 'application/json',
+                data: {
+                    "api_mode": 1,
+                    limit: 10,
+                    page: --showPage
+                },
+                success: function (response) {
+                    if (response.success == true) {
+                        var slNumber;
+                        if (showPage == 0) {
+                            slNumber = 1;
+                        }
+                        else if (showPage == 1) {
+                            slNumber = 11;
+                        }
+                        else if (showPage == 2) {
+                            slNumber = 21;
+                        }
+                        else if (showPage == 3) {
+                            slNumber = 31;
+                        }
+                        else if (showPage == 4) {
+                            slNumber = 41;
+                        }
+                        else if (showPage == 5) {
+                            slNumber = 51;
+                        }
+                        var totalPages = sessionStorage.getItem("totPages");
+
+                        $(".pagination").html("");
+                        for (var idx = 0, len = totalPages; idx < len; idx++) {
+
+                            $(".pagination").append('<li class="page-item"><a class="page-link" id="' + (idx + 1) + '" href="#">' + (idx + 1) + '</a></li>');
+                        }
+                        $(".page-item .active").removeClass("active");
+                        $("#" + (showPage + 1)).parent().addClass("active")
+
+                        $(".tl-trx").text(response.total_amount);
+                        $("#customersTbl tbody").html("");
+                        for (var i = 0, len = response.data.length; i < len; i++) {
+                            var cDate = new Date(response.data[i].create_date);
+                            var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (slNumber++) + '</th><td>' + response.data[i].name + '</td><td>' + response.data[i].phone + '</td><td class="balCol"><div style="float:left;"><a class="viewBalLink">View Balance</a></div></td><td>' + formatedCDate + '</td><td>' + response.data[i].app_id + '</td><td><a class="viewTrxLink">View Transactions</a></td></tr>';
+
+                            $("#customersTbl tbody").append(rowList);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+#customersTbl_wrapper .dataTables_length, #trxTbl_wrapper .dataTables_length{
+float:left;
+}
+
+#customersTbl_wrapper #customersTbl_filter, #trxTbl_wrapper #trxTbl_filter{
+float:right;
+}
+
+#customersTbl_wrapper select.form-control:not([size]):not([multiple]), #trxTbl_wrapper select.form-control:not([size]):not([multiple]) {
+    height: calc(1.55rem + 2px);
+}
+
+#customersTbl_wrapper .custom-select, #customersTbl_wrapper .form-control, #trxTbl_wrapper .custom-select, #trxTbl_wrapper .form-control {   
+    padding: 2px 10px;   
+}
+
+.table td, .table th{
+    padding:5px !important;    
+}
+
+.viewBalLink, .viewTrxLink{
+    background-color: #28a745;
+    padding: 5px;
+    color: #ffffff !important;
+    border-radius: 0px;
+    font-size: 12px;
+    float:left;
+    width: 84px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.viewTrxLink{      
+    width: 110px !important;   
+}
+
+.balBox{
+    /* outline: solid 1px green; */
+    padding: 4px;
+    font-size: 14px;
+    /* color: #ffffff;*/
+    margin-left:10px;
+}
+
+.seperator .table-responsive{    
+    margin-bottom: 5px;
+    border-bottom: solid 1px #cccccc;
+}
+
+.itemIng{
+    margin-right:10px;
+}
+
+@media (min-width: 576px){
+.modal-dialog{
+    max-width:60vw !important;
+    font-size: 14px !important;
+}
+}
+#viewItemsModal .modal-body{
+    max-height: 400px;
+    overflow: auto;
+    padding-top: 0px;
+}
+
+#viewItemsModalLabel{
+    padding:5px 1rem;
+    margin-bottom: 0px;
+}
