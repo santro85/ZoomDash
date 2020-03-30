@@ -14,9 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description"
-        content="Zoom app dashboard." />
+        content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords"
-        content="Zoom, Zoom Dashboard" />
+        content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template" />
     <meta name="author" content="CodedThemes" />
 
     <!-- Favicon icon -->
@@ -55,7 +55,7 @@
     <nav class="pcoded-navbar">
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo">
-                <a href="index.html" class="b-brand">
+                <a href="index1.html" class="b-brand">
                     <!-- <div class="b-bg"> -->
                     <!-- <i class="feather icon-trending-up"></i> -->
                     <img src="assets/images/z.png" height="40px" />
@@ -74,7 +74,7 @@
                             <span class="pcoded-mtext">Dashboard</span>
                         </a>
                     </li>
-                    <li data-username="mqtt subscribers" class="nav-item">
+                    <li data-username="customers" class="nav-item">
                         <a href="customers.html" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="feather icon-user"></i>
@@ -82,12 +82,20 @@
                             <span class="pcoded-mtext">Customers</span>
                         </a>
                     </li>
-                    <li data-username="mqtt subscribers" class="nav-item active">
+                    <li data-username="transactions" class="nav-item active">
                         <a href="transactions.html" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="fas fa-money-bill-wave"></i>
                             </span>
                             <span class="pcoded-mtext">Transactions</span>
+                        </a>
+                    </li>
+                    <li data-username="transactions" class="nav-item">
+                        <a href="transactionsAccord.html.html" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </span>
+                            <span class="pcoded-mtext">Transactions1</span>
                         </a>
                     </li>
                 </ul>
@@ -100,11 +108,12 @@
     <header class="navbar pcoded-header navbar-expand-lg navbar-light">
         <div class="m-header">
             <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
-            <a href="index.html" class="b-brand">
-                <div class="b-bg">
-                    <i class="feather icon-trending-up"></i>
-                </div>
-                <span class="b-title">Datta Able</span>
+            <a href="index1.html" class="b-brand">
+
+                <!-- <i class="feather icon-trending-up"></i> -->
+                <img src="assets/images/z.png" height="20px" />
+
+                <span class="b-title">Zoom</span>
             </a>
         </div>
         <a class="mobile-menu" id="mobile-header" href="javascript:">
@@ -285,7 +294,7 @@
                                 flowType = "QSR";
                             }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (flowType == "QSR" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
                             $("#trxTbl tbody").append(rowList);
                         }
                         trxTable = $('#trxTbl').DataTable(
@@ -302,8 +311,8 @@
                     // //$(".tl-cust").text(response.totalCount);
                     // $(".tl-cust").text(response.data.length);
                     // $(".tl-trx").text(response.total_amount);
-                    //
-                    //
+                    // 
+                    // 
                 }
             });
 
@@ -369,6 +378,18 @@
                                     }
                                 }
 
+                                if (flow == "Grocery") {
+                                    var cDetails = JSON.parse(JSON.parse(invoiceData).data.contact_details);
+                                    var ItemsData = JSON.parse(cDetails.items);
+
+                                    $("#viewItemsModalLabel").html("<b>Grocery </b> | " + formatedCrtDate + " | &#8377;" + response.data[linkRow].amount);
+                                    $("#itemsTbl thead").append("<tr><th>Item</th><th>Price</th><th>Quantity</th><th>GST</th><th>Amount</th></tr>");
+                                    for (var i = 0, len = ItemsData.length; i < len; i++) {
+                                        var items = '<tr><td>' + ItemsData[i].name + '</td><td>' + ItemsData[i].rate + '</td><td>' + ItemsData[i].quantity + '</td><td>' + ItemsData[i].gst + '</td><td>' + ItemsData[i].amount + '</td></tr>'
+
+                                        $("#itemsTbl tbody").append(items);
+                                    }
+                                }
                             }
                             else {
                                 $("#itemsTbl tbody").append('<tr><td colspan="8" align="center">No Invoice Details</td></tr>');
