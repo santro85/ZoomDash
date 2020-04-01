@@ -18,7 +18,7 @@ float:right;
     padding:5px !important;    
 }
 
-.viewBalLink, .viewTrxLink{
+.viewBalLink, .viewTrxLink, .viewItmBtn{
     background-color: #28a745;
     padding: 5px;
     color: #ffffff !important;
@@ -28,6 +28,7 @@ float:right;
     width: 84px;
     text-align: center;
     cursor: pointer;
+    border: none;
 }
 
 .viewTrxLink{      
@@ -67,3 +68,7 @@ float:right;
     padding:5px 1rem;
     margin-bottom: 0px;
 }
+
+.viewItmBtn[aria-expanded='true']{
+    background-color:#007bff;
+} 
