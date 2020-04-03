@@ -72,3 +72,14 @@ float:right;
 .viewItmBtn[aria-expanded='true']{
     background-color:#007bff;
 } 
+
+#customersTbl td.nameCell{
+    white-space: normal;
+}
+
+
+.viewBalLnkConatiner{
+    float:left;
+    white-space: normal;
+}
+}
