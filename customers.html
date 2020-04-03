@@ -342,7 +342,7 @@
 
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
 
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td class="text-break">' + response.data[i].name + '</td><td>' + response.data[i].phone + '</td><td class="balCol">' + (response.data[i].is_apl_registered == true ? '<div style="float:left;"><a class="viewBalLink">View Balance</a></div>' : '<span></span>') + '</td><td>' + formatedCDate + '</td><td>' + response.data[i].app_id + '</td><td>' + (response.data[i].is_apl_registered == true ? '<a class="viewTrxLink">View Transactions</a>' : '<span></span>') + '</td></tr>';
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td class="nameCell">' + response.data[i].name + '</td><td>' + response.data[i].phone + '</td><td class="balCol">' + (response.data[i].is_apl_registered == true ? '<div class="viewBalLnkConatiner"><a class="viewBalLink">View Balance</a></div>' : '<span></span>') + '</td><td>' + formatedCDate + '</td><td>' + response.data[i].app_id + '</td><td>' + (response.data[i].is_apl_registered == true ? '<a class="viewTrxLink">View Transactions</a>' : '<span></span>') + '</td></tr>';
 
                             $("#customersTbl tbody").append(rowList);
                         }
