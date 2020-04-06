@@ -58,16 +58,6 @@ float:right;
     font-size: 14px !important;
 }
 }
-#viewItemsModal .modal-body{
-    max-height: 400px;
-    overflow: auto;
-    padding-top: 0px;
-}
-
-#viewItemsModalLabel{
-    padding:5px 1rem;
-    margin-bottom: 0px;
-}
 
 .viewItmBtn[aria-expanded='true']{
     background-color:#007bff;
@@ -85,4 +75,10 @@ float:right;
 .oSummary{
     padding:0px 1rem;
     margin-bottom:0px;
+}
+
+.customMBody{
+    padding-top:0px;
+    max-height: 400px;
+    overflow: auto;
 }
