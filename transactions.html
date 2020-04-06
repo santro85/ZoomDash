@@ -205,8 +205,9 @@
                                                             <th>Trx Reference</th>
                                                             <th>Flow</th>
                                                             <th>Amount</th>
-                                                            <th>Status</th>
+                                                            <th>Payment</th>
                                                             <th>Action</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -226,6 +227,12 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+
+
+
+    <!-- [ Main Content ] end -->
 
     <script type="text/javascript">
         function getUrlParameter(name) {
@@ -262,9 +269,29 @@
                             else if (response.data[i].transaction_type_id == 3) {
                                 flowType = "QSR";
                             }
+
+                            var orderStatus;
+                            if (response.data[i].order_status == "" || response.data[i].order_status == null) {
+                                orderStatus = "Order Placed";
+                            }
+                            else if (response.data[i].order_status == 1) {
+                                orderStatus = "Order Accepted";
+                            }
+
+                            else if (response.data[i].order_status == 2) {
+                                orderStatus = "Order Ready";
+                            }
+
+                            else if (response.data[i].order_status == 3) {
+                                orderStatus = "Order Served";
+                            }
+
+                            else if (response.data[i].order_status == 4) {
+                                orderStatus = "Order Rejected";
+                            }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
 
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td><td>' + (flowType != "P2M" ? orderStatus : 'NA') + '</td></tr>';
 
                             $("#trxTbl tbody").append(rowList);
 
@@ -319,6 +346,7 @@
                                     }
                                 }
                             }
+
                         }
 
                         trxTable = $('#trxTbl').DataTable(
@@ -333,6 +361,7 @@
                         );
 
                     }
+
                 }
             });
 
