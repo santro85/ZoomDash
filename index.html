@@ -251,8 +251,10 @@
                     if (response.success == true) {
                         //sessionStorage.setItem("totCust", response.totalCount);
                         sessionStorage.setItem("totPages", response.totalPages);
+                        let tAmt = amountFormatter.format(response.total_amount);
+                        tAmt = tAmt.substring(1);
                         $(".tl-cust").text(response.totalCount);
-                        $(".tl-trx").text(amountFormatter.format(response.total_amount));
+                        $(".tl-trx").text(tAmt);
                     }
 
                 }
