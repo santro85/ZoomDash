@@ -35,6 +35,7 @@
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/custom.js"></script>
 
 </head>
 
@@ -251,7 +252,7 @@
                         //sessionStorage.setItem("totCust", response.totalCount);
                         sessionStorage.setItem("totPages", response.totalPages);
                         $(".tl-cust").text(response.totalCount);
-                        $(".tl-trx").text(response.total_amount);
+                        $(".tl-trx").text(amountFormatter.format(response.total_amount));
                     }
 
                 }
