@@ -77,9 +77,12 @@ float:right;
     white-space: normal;
 }
 
-
 .viewBalLnkConatiner{
     float:left;
     white-space: normal;
 }
+
+.oSummary{
+    padding:0px 1rem;
+    margin-bottom:0px;
 }
