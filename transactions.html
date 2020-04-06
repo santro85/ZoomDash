@@ -89,9 +89,8 @@
                             </span>
                             <span class="pcoded-mtext">Transactions</span>
                         </a>
-			</li>
-			
-<!-- 			<li data-username="mqtt subscribers" class="nav-item active">
+                    </li>
+                    <!-- <li data-username="transactions" class="nav-item">
                         <a href="transactionsAccord.html" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="fas fa-money-bill-wave"></i>
@@ -124,7 +123,7 @@
             <ul class="navbar-nav mr-auto">
                 <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i
                             class="feather icon-maximize"></i></a></li>
-<!--                 <li class="nav-item">
+                <li class="nav-item">
                     <div class="main-search">
                         <div class="input-group">
                             <input type="text" id="m-search" class="form-control" placeholder="Search . . .">
@@ -136,7 +135,7 @@
                             </span>
                         </div>
                     </div>
-                </li> -->
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li>
@@ -206,7 +205,7 @@
                                                             <th>Trx Reference</th>
                                                             <th>Flow</th>
                                                             <th>Amount</th>
-							    <th>Status</th>
+                                                            <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -227,38 +226,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="viewItemsModal" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title storeName"></h5></br>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <p id="viewItemsModalLabel"></p>
-                <div class="modal-body">
-
-                    <table class="table table-sm" id="itemsTbl">
-                        <thead>
-
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
-            </div>
-        </div>
-    </div>
-    <!-- [ Main Content ] end -->
 
     <script type="text/javascript">
         function getUrlParameter(name) {
@@ -296,64 +263,15 @@
                                 flowType = "QSR";
                             }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
+
+                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td></tr>';
+
                             $("#trxTbl tbody").append(rowList);
-                        }
-                        trxTable = $('#trxTbl').DataTable(
-                            {
-                                "pagingType": "numbers",
-                                "pageLength": 10,
-                                "lengthChange": true,
-                                "ordering": false,
-                                "info": false,
-                                "bFilter": true,
-                            }
-                        );
-                    }
-                    // //$(".tl-cust").text(response.totalCount);
-                    // $(".tl-cust").text(response.data.length);
-                    // $(".tl-trx").text(response.total_amount);
-                    // 
-                    // 
-                }
-            });
 
-
-            $(document).on("click", ".viewTrxLink", function () {
-                var linkRow = $(this).attr("id");
-                linkRow = --linkRow;
-                $("#itemsTbl tbody,#itemsTbl thead, .storeName, #viewItemsModalLabel").html("");
-                $.ajax({
-                    url: "https://8gvfppglb0.execute-api.ap-south-1.amazonaws.com/apl/apl-details",
-                    type: "GET",
-                    crossDomain: true,
-                    //dataType: "jsonp",
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: { "api_mode": 2, "app_id": appID },
-                    success: function (response) {
-
-                        if (response.success == true) {
-                            // var amt = response.data[linkRow].amount;
-                            var crtDate = new Date(response.data[linkRow].created_date);
-                            var formatedCrtDate = ("0" + crtDate.getDate()).slice(-2) + "/" + ("0" + (crtDate.getMonth() + 1)).slice(-2) + '/' + crtDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + crtDate.getHours()).slice(-2) + ":" + ("0" + crtDate.getMinutes()).slice(-2) + ":" + ("0" + crtDate.getSeconds()).slice(-2);
-
-                            var flow;
-                            if (response.data[linkRow].transaction_type_id == 1) {
-                                flow = "P2M";
-                            }
-                            else if (response.data[linkRow].transaction_type_id == 2) {
-                                flow = "Grocery";
-                            }
-                            else if (response.data[linkRow].transaction_type_id == 3) {
-                                flow = "QSR";
-                            }
-
-                            var invoiceData = response.data[linkRow].invoice_details;
+                            var invoiceData = response.data[i].invoice_details;
                             if (invoiceData != "") {
 
-                                $(".storeName").text(response.data[linkRow].store_name);
-                                if (flow == "QSR") {
+                                if (flowType == "QSR") {
                                     var oType = JSON.parse(JSON.parse(invoiceData).order_type);
 
                                     var oTypeValue;
@@ -370,46 +288,56 @@
                                         oTypeValue = "Take Away";
                                     }
 
-                                    var ItemsData = JSON.parse(JSON.parse(invoiceData).items);
-                                    $("#viewItemsModalLabel").html("<b>QSR </b> | " + oTypeValue + " | " + formatedCrtDate + " | &#8377;" + response.data[linkRow].amount);
-                                    $("#itemsTbl thead").append("<tr><th>Category</th><th>Item</th><th>Price</th><th>Quantity</th><th>Offer</th><th>Packaging</th><th>Tax</th><th>Cost</th></tr>");
-                                    for (var i = 0, len = ItemsData.length; i < len; i++) {
-                                        var items = '<tr><td>' + ItemsData[i].category_name + '</td><td>' + (ItemsData[i].image_url != "" ? '<img src=' + ItemsData[i].image_url + ' height="20px" width="20px" class="itemIng"/>' : '<span></span>') + ItemsData[i].item_name + '</td><td>' + ItemsData[i].item_price + '</td><td>' + ItemsData[i].add_item_quantity + '</td><td>' + ItemsData[i].offer + '</td><td>' + (ItemsData[i].packing_charge ? ItemsData[i].packing_charge : 0) + '</td><td>' + (ItemsData[i].TAXES ? '<span>CESS :' + ItemsData[i].TAXES.CESS + '</span>|<span>CGST :' + ItemsData[i].TAXES.CGST + '</span>|<span>SGST :' + ItemsData[i].TAXES.SGST + '</span></br>' : 0) + '</td><td>' + ItemsData[i].item_total + '</td></tr>'
+                                    var QItemsData = JSON.parse(JSON.parse(invoiceData).items);
 
-                                        $("#itemsTbl tbody").append(items);
+                                    var QdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>QSR </b> | ' + oTypeValue + ' | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Category</th><th>Item</th><th>Price</th><th>Quantity</th><th>Offer</th><th>Packaging</th><th>Tax</th><th>Cost</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
+
+
+                                    $("body").append(QdialogContent);
+
+                                    for (var idx = 0, lth = QItemsData.length; idx < lth; idx++) {
+                                        var Qitems = '<tr><td>' + QItemsData[idx].category_name + '</td><td>' + (QItemsData[idx].image_url != "" ? '<img src=' + QItemsData[idx].image_url + ' height="20px" width="20px" class="itemIng"/>' : '<span></span>') + QItemsData[idx].item_name + '</td><td>' + QItemsData[idx].item_price + '</td><td>' + QItemsData[idx].add_item_quantity + '</td><td>' + QItemsData[idx].offer + '</td><td>' + (QItemsData[idx].packing_charge ? QItemsData[idx].packing_charge : 0) + '</td><td>' + (QItemsData[idx].TAXES ? '<span>CESS :' + QItemsData[idx].TAXES.CESS + '</span>|<span>CGST :' + QItemsData[idx].TAXES.CGST + '</span>|<span>SGST :' + QItemsData[idx].TAXES.SGST + '</span></br>' : 0) + '</td><td>' + QItemsData[idx].item_total + '</td></tr>'
+
+                                        $("#itemsTbl" + [i + 1] + " tbody").append(Qitems);
                                     }
                                 }
 
-                                if (flow == "Grocery") {
+
+                                if (flowType == "Grocery") {
                                     var cDetails = JSON.parse(JSON.parse(invoiceData).data.contact_details);
-                                    var ItemsData = JSON.parse(cDetails.items);
+                                    var GItemsData = JSON.parse(cDetails.items);
 
-                                    $("#viewItemsModalLabel").html("<b>Grocery </b> | " + formatedCrtDate + " | &#8377;" + response.data[linkRow].amount);
-                                    $("#itemsTbl thead").append("<tr><th>Item</th><th>Price</th><th>Quantity</th><th>GST</th><th>Amount</th></tr>");
-                                    for (var i = 0, len = ItemsData.length; i < len; i++) {
-                                        var items = '<tr><td>' + ItemsData[i].name + '</td><td>' + ItemsData[i].rate + '</td><td>' + ItemsData[i].quantity + '</td><td>' + ItemsData[i].gst + '</td><td>' + ItemsData[i].amount + '</td></tr>'
+                                    var GdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>Grocery </b> | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>GST</th><th>Amount</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
 
-                                        $("#itemsTbl tbody").append(items);
+                                    $("body").append(GdialogContent);
+
+
+                                    for (var ind = 0, lth = GItemsData.length; ind < lth; ind++) {
+                                        var Gitems = '<tr><td>' + GItemsData[ind].name + '</td><td>' + GItemsData[ind].rate + '</td><td>' + GItemsData[ind].quantity + '</td><td>' + GItemsData[ind].gst + '</td><td>' + GItemsData[ind].amount + '</td></tr>'
+
+                                        $("#itemsTbl" + [i + 1] + " tbody").append(Gitems);
                                     }
                                 }
                             }
-                            else {
-                                $("#itemsTbl tbody").append('<tr><td colspan="8" align="center">No Invoice Details</td></tr>');
-                            }
-
                         }
+
+                        trxTable = $('#trxTbl').DataTable(
+                            {
+                                "pagingType": "numbers",
+                                "pageLength": 10,
+                                "lengthChange": true,
+                                "ordering": false,
+                                "info": false,
+                                "bFilter": true,
+                            }
+                        );
+
                     }
-                });
+                }
             });
 
-
-
         });
-
     </script>
-
-
-
 </body>
 
 </html>
