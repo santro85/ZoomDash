@@ -272,26 +272,26 @@
 
                             var orderStatus;
                             if (response.data[i].order_status == "" || response.data[i].order_status == null) {
-                                orderStatus = "Order Placed";
+                                orderStatus = '<div class="text-grey"><span>Order Placed</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
                             }
                             else if (response.data[i].order_status == 1) {
-                                orderStatus = "Order Accepted";
+                                orderStatus = '<div class="text-blue"><span>Order Accepted</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
                             }
 
                             else if (response.data[i].order_status == 2) {
-                                orderStatus = "Order Ready";
+                                orderStatus = '<div class="text-orange"><span>Order Ready</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
                             }
 
                             else if (response.data[i].order_status == 3) {
-                                orderStatus = "Order Served";
+                                orderStatus = '<span class="text-green">Order Served</span>';
                             }
 
                             else if (response.data[i].order_status == 4) {
-                                orderStatus = "Order Rejected";
+                                orderStatus = '<span class="text-red">Order Rejected</span>';
                             }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
 
-                            var rowList = '<tr id=' + response.data[i].app_id + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td><td>' + (flowType != "P2M" ? orderStatus : 'NA') + '</td></tr>';
+                            var rowList = '<tr id=' + (i) + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td><td>' + (flowType != "P2M" ? orderStatus : 'NA') + '</td></tr>';
 
                             $("#trxTbl tbody").append(rowList);
 
@@ -319,7 +319,6 @@
 
                                     var QdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>QSR </b> | ' + oTypeValue + ' | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body customMBody"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Category</th><th>Item</th><th>Price</th><th>Quantity</th><th>Offer</th><th>Packaging</th><th>Tax</th><th>Cost</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
 
-
                                     $("body").append(QdialogContent);
 
                                     for (var idx = 0, lth = QItemsData.length; idx < lth; idx++) {
@@ -337,7 +336,6 @@
                                     var GdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>Grocery </b> | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body customMBody"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>GST</th><th>Amount</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
 
                                     $("body").append(GdialogContent);
-
 
                                     for (var ind = 0, lth = GItemsData.length; ind < lth; ind++) {
                                         var Gitems = '<tr><td>' + GItemsData[ind].name + '</td><td>' + GItemsData[ind].rate + '</td><td>' + GItemsData[ind].quantity + '</td><td>' + GItemsData[ind].gst + '</td><td>' + GItemsData[ind].amount + '</td></tr>'
@@ -359,12 +357,51 @@
                                 "bFilter": true,
                             }
                         );
-
                     }
-
                 }
             });
 
+
+            //$(this).html("<i class='fa fa-spinner fa-spin'></i>Loading");
+            $(document).on("click", ".statusRefresh", function () {
+                var clickedRow = $(this).parent().parent().parent().attr("id");
+                $(this).html("").html("<i class='fa fa-spinner fa-spin'></i>");
+
+                $.ajax({
+                    url: "https://8gvfppglb0.execute-api.ap-south-1.amazonaws.com/apl/apl-details",
+                    type: "GET",
+                    crossDomain: true,
+                    //dataType: "jsonp",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: { "api_mode": 2, "app_id": appID },
+                    success: function (response) {
+                        if (response.success == true) {
+                            var refreshedStatus;
+                            if (response.data[clickedRow].order_status == "" || response.data[clickedRow].order_status == null) {
+                                refreshedStatus = '<div class="text-grey"><span>Order Placed</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
+                            }
+                            else if (response.data[clickedRow].order_status == 1) {
+                                refreshedStatus = '<div class="text-blue"><span>Order Accepted</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
+                            }
+
+                            else if (response.data[clickedRow].order_status == 2) {
+                                refreshedStatus = '<div class="text-orange"><span>Order Ready</span><a class="statusRefresh"><i class="fas fa-sync-alt"></i></a></div>';
+                            }
+
+                            else if (response.data[clickedRow].order_status == 3) {
+                                refreshedStatus = '<span class="text-green">Order Served</span>';
+                            }
+
+                            else if (response.data[clickedRow].order_status == 4) {
+                                refreshedStatus = '<span class="text-red">Order Rejected</span>';
+                            }
+
+                            $("#trxTbl tr#" + clickedRow + " td:last").html(refreshedStatus);
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
