@@ -13,10 +13,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description"
-        content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-    <meta name="keywords"
-        content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template" />
+    <meta name="description" content="Zoom Dashboard" />
+    <meta name="keywords" content="Zoom, Dashboard" />
     <meta name="author" content="CodedThemes" />
 
     <!-- Favicon icon -->
@@ -123,7 +121,7 @@
             <ul class="navbar-nav mr-auto">
                 <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i
                             class="feather icon-maximize"></i></a></li>
-<!--                 <li class="nav-item">
+                <!-- <li class="nav-item">
                     <div class="main-search">
                         <div class="input-group">
                             <input type="text" id="m-search" class="form-control" placeholder="Search . . .">
@@ -319,16 +317,15 @@
                                     if (oType == "3") {
                                         oTypeValue = "Take Away";
                                     }
+                                    //var QItemsData = JSON.parse(JSON.parse(invoiceData).items);
+                                    var QItemsData = JSON.parse(invoiceData).items;
 
-//                                     var QItemsData = JSON.parse(JSON.parse(invoiceData).items);
-					var QItemsData = JSON.parse(invoiceData).items;
-
-                                    var QdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>QSR </b> | ' + oTypeValue + ' | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body customMBody"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Category</th><th>Item</th><th>Price</th><th>Quantity</th><th>Offer</th><th>Packaging</th><th>Tax</th><th>Cost</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
+                                    var QdialogContent = '<div class="modal fade" id="viewItemsModal' + [i + 1] + '" tabindex="-1" role="dialog" aria-labelledby="viewItemsModalLabel' + [i + 1] + '" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title storeName">' + response.data[i].store_name + '</h5></br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><p class="oSummary" id="viewItemsModalLabel' + [i + 1] + '"><b>QSR </b> | ' + oTypeValue + ' | ' + formatedCDate + ' | &#8377;' + response.data[i].amount + '</p><div class="modal-body customMBody"><table class="table table-sm" id="itemsTbl' + [i + 1] + '"><thead><tr><th>Item Type</th><th>Item</th><th>Price</th><th>Quantity</th><th>Discount</th><th>Packaging</th><th>Tax</th><th>Cost</th></tr></thead><tbody></tbody></table ></div ></div ></div> </div>';
 
                                     $("body").append(QdialogContent);
 
                                     for (var idx = 0, lth = QItemsData.length; idx < lth; idx++) {
-                                        var Qitems = '<tr><td>' + QItemsData[idx].category_name + '</td><td>' + (QItemsData[idx].image_url != "" ? '<img src=' + QItemsData[idx].image_url + ' height="20px" width="20px" class="itemIng"/>' : '<span></span>') + QItemsData[idx].item_name + '</td><td>' + QItemsData[idx].item_price + '</td><td>' + QItemsData[idx].add_item_quantity + '</td><td>' + QItemsData[idx].offer + '</td><td>' + (QItemsData[idx].packing_charge ? QItemsData[idx].packing_charge : 0) + '</td><td>' + (QItemsData[idx].TAXES ? '<span>CESS :' + QItemsData[idx].TAXES.CESS + '</span>|<span>CGST :' + QItemsData[idx].TAXES.CGST + '</span>|<span>SGST :' + QItemsData[idx].TAXES.SGST + '</span></br>' : 0) + '</td><td>' + QItemsData[idx].item_total + '</td></tr>'
+                                        var Qitems = '<tr><td>' + QItemsData[idx].item_type + '</td><td>' + QItemsData[idx].item_name + '</td><td>' + QItemsData[idx].item_price + '</td><td>' + QItemsData[idx].add_item_quantity + '</td><td>' + (QItemsData[idx].summary ? QItemsData[idx].summary.discount : 0 )+ '</td><td>'+ (QItemsData[idx].summary ? QItemsData[idx].summary.package_charge : 0) + '</td><td>' + (QItemsData[idx].TAXES ? '<span>CESS :' + QItemsData[idx].TAXES.CESS + '</span>|<span>CGST :' + QItemsData[idx].TAXES.CGST + '</span>|<span>SGST :' + QItemsData[idx].TAXES.SGST + '</span></br>' : 0) + '</td><td>' + QItemsData[idx].item_total + '</td></tr>'
 
                                         $("#itemsTbl" + [i + 1] + " tbody").append(Qitems);
                                     }
