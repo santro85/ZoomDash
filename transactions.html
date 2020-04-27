@@ -201,6 +201,7 @@
                                                             <th>#</th>
                                                             <th>Date & Time</th>
                                                             <th>Trx Reference</th>
+                                                            <th>Store</th>
                                                             <th>Flow</th>
                                                             <th>Amount</th>
                                                             <th>Payment</th>
@@ -294,7 +295,7 @@
                             }
                             var formatedCDate = ("0" + cDate.getDate()).slice(-2) + "/" + ("0" + (cDate.getMonth() + 1)).slice(-2) + '/' + cDate.getFullYear() + " &nbsp;&nbsp;&nbsp;" + ("0" + cDate.getHours()).slice(-2) + ":" + ("0" + cDate.getMinutes()).slice(-2) + ":" + ("0" + cDate.getSeconds()).slice(-2);
 
-                            var rowList = '<tr id=' + (i) + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td><td>' + (flowType != "P2M" ? orderStatus : 'NA') + '</td></tr>';
+                            var rowList = '<tr id=' + (i) + '><th scope="row">' + (i + 1) + '</th><td>' + formatedCDate + '</td><td>' + response.data[i].transaction_reference + '</td><td>'+ response.data[i].store_name +'</td><td>' + flowType + '</td><td>' + response.data[i].amount + '</td><td>' + (response.data[i].status_id == 2 ? "Success" : "Failed") + '</td><td>' + (flowType != "P2M" ? '<a class="viewTrxLink" data-toggle="modal" data-target="#viewItemsModal' + [i + 1] + '" id="' + (i + 1) + '">View Items</a>' : '<span></span>') + '</td><td>' + (flowType != "P2M" ? orderStatus : 'NA') + '</td></tr>';
 
                             $("#trxTbl tbody").append(rowList);
 
